@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
-import '../widgets/ddm.dart';
-import '../widgets/button.dart';
-import '../widgets/login_form.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import '/widgets/ddm.dart';
+import '/widgets/button.dart';
+import '/widgets/login_form.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -18,24 +17,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordController = TextEditingController();
   bool isRegistered = false;
 
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-
   void _register() async {
     Navigator.of(context).pop();
-    // try {
-    //   UserCredential userCredential =
-    //       await _auth.createUserWithEmailAndPassword(
-    //     email: usernameController.text,
-    //     password: passwordController.text,
-    //   );
-    //   // Registration successful, you can handle the user or navigate to another screen.
-    //   print('User registered: ${userCredential.user?.email}');
-    // } on FirebaseAuthException catch (e) {
-    //   print('Error during registration: ${e.message}');
-    // }
   }
 
-  void login() {
+  void _login() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
@@ -67,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           const SizedBox(height: 10),
           GestureDetector(
-            onTap: login,
+            onTap: _login,
             child: const Padding(
               padding: /**/ EdgeInsets.symmetric(horizontal: 25.0),
               child: Row(

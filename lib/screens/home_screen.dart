@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:peminjaman_kelas_gku/widgets/button.dart';
-import 'package:peminjaman_kelas_gku/widgets/ddm.dart';
+import '/widgets/button.dart';
+import '/widgets/ddm.dart';
+import 'gku/ruangan_screen.dart';
 
 final List<String> imgList = [
   'https://i.ibb.co/qsSrkqy/14052609-611006929102219-627606034613010432-n.jpg',
@@ -97,10 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 right: size.width / 5,
                 child: Button(
                   actionOnButton: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const RuanganScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RuanganScreen()));
                   },
                   buttonText: 'Mulai',
                 )),

@@ -1,11 +1,10 @@
 // import "dart:developer" as dev;
-// import "package:firebase_auth/firebase_auth.dart";
 import 'package:flutter/material.dart';
-import 'package:peminjaman_kelas_gku/screens/home_screen.dart';
+import '/screens/home_screen.dart';
 import 'register_screen.dart';
-import '../widgets/ddm.dart';
-import '../widgets/button.dart';
-import '../widgets/login_form.dart';
+import '/widgets/ddm.dart';
+import '/widgets/button.dart';
+import '/widgets/login_form.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,37 +15,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // final _loginFormKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoggedIn = false;
 
   void _login() async {
     Navigator.of(context).pop();
-    // if (_loginFormKey.currentState != null &&
-    //     _loginFormKey.currentState!.validate()) {
-    //   showDialog(
-    //       context: context,
-    //       builder: (context) {
-    //         return const Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       });
-    //   try {
-    //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-    //         email: usernameController.text, password: passwordController.text);
-    //     // ignore: use_build_context_synchronously
-    //     Navigator.pop(context);
-    //   } on FirebaseAuthException catch (e) {
-    //     // ignore: use_build_context_synchronously
-    //     Navigator.pop(context);
-    //     if (e.code == 'user-not-found') {
-    //       dev.log("Wrong Mail", name: "Error");
-    //     } else if (e.code == 'wrong-password') {
-    //       dev.log("Wrong Password", name: "Error");
-    //     }
-    //   }
-    // }
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   void register() {
@@ -100,14 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          Button(
-              actionOnButton: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
-              },
-              buttonText: "Login")
+          Button(actionOnButton: _login, buttonText: "Login")
         ],
       ),
     );
