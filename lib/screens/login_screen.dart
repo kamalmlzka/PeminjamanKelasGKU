@@ -1,6 +1,7 @@
 // import "dart:developer" as dev;
 // import "package:firebase_auth/firebase_auth.dart";
 import 'package:flutter/material.dart';
+import 'package:peminjaman_kelas_gku/screens/home_screen.dart';
 import 'register_screen.dart';
 import '../widgets/ddm.dart';
 import '../widgets/button.dart';
@@ -99,7 +100,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          Button(actionOnButton: _login, buttonText: "Login")
+          Button(
+              actionOnButton: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              },
+              buttonText: "Login")
         ],
       ),
     );

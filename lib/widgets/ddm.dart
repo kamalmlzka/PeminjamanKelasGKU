@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:peminjaman_kelas_gku/screens/home_screen.dart';
+import 'package:peminjaman_kelas_gku/screens/home_screen.dart';
 // import '../gku/gku_home_screen.dart';
 // import '../screens/dashboard.dart';
 // import '../screens/notification.dart';
@@ -56,8 +56,8 @@ class DDM extends StatelessWidget {
               title: const Text('Beranda'),
               onTap: () {
                 Navigator.of(context).pop();
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => const HomeScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()));
               },
             ),
             ListTile(
