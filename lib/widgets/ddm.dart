@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:peminjaman_kelas_gku/screens/login_screen.dart';
+import 'package:peminjaman_kelas_gku/screens/notifikasi_screen.dart';
+import 'package:peminjaman_kelas_gku/screens/profile_screen.dart';
 import '/screens/gku/ruangan_screen.dart';
 import '/screens/home_screen.dart';
-// import '/screens/notification.dart';
-// import '/screens/profile.dart';
 
 class DDM extends StatelessWidget {
   final Widget child;
@@ -75,31 +77,67 @@ class DDM extends StatelessWidget {
               title: const Text('Notifikasi'),
               onTap: () {
                 Navigator.of(context).pop();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => Notifications()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NotificationScreen()),
+                );
               },
             ),
             ListTile(
               title: const Text('Profile'),
               onTap: () {
                 Navigator.of(context).pop();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const Profile()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                );
               },
             ),
             ListTile(
               title: const Text('Logout'),
               onTap: () {
-                Navigator.of(context).pop();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const LogoutPage()),
-                // );
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Konfirmasi Logout'),
+                      content: const Text(
+                          'Anda akan logout dari akun Anda. Apakah Anda ingin melanjutkan?'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.red),
+                          ),
+                          child: const Text(
+                            'Tidak',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              CupertinoPageRoute(
+                                  builder: (context) => const LoginScreen()),
+                              (_) => false,
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green, // Background color
+                          ),
+                          child: const Text(
+                            'Ya',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import '/widgets/ddm.dart';
@@ -14,11 +15,40 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController usernameController = TextEditingController();
+  TextEditingController nimController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isRegistered = false;
 
   void _register() async {
-    Navigator.of(context).pop();
+    // Simulate registration process
+    // Replace this with your actual registration logic
+
+    // Assume registration is successful
+    setState(() {
+      isRegistered = true;
+    });
+
+    // Show success dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Registration Successful'),
+          content: const Text('You have successfully registered.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  CupertinoPageRoute(builder: (context) => const LoginScreen()),
+                  (_) => false,
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _login() {
@@ -43,6 +73,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             label: "Username",
             readOnly: false,
             obscureText: false,
+          ),
+          const SizedBox(height: 10),
+          LoginForm(
+            controller: nimController,
+            obscureText: false,
+            label: 'NIM',
+            readOnly: false,
           ),
           const SizedBox(height: 10),
           LoginForm(
