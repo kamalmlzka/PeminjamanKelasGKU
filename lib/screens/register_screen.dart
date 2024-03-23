@@ -17,18 +17,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController nimController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   bool isRegistered = false;
 
   void _register() async {
-    // Simulate registration process
-    // Replace this with your actual registration logic
+    if (passwordController.text != confirmPasswordController.text) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Passwords do not match.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
 
-    // Assume registration is successful
     setState(() {
       isRegistered = true;
     });
 
-    // Show success dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -89,10 +106,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             readOnly: false,
           ),
           const SizedBox(height: 10),
+          LoginForm(
+            controller: confirmPasswordController,
+            obscureText: true,
+            label: 'Confirm Password',
+            readOnly: false,
+          ),
+          const SizedBox(height: 10),
           GestureDetector(
             onTap: _login,
             child: const Padding(
-              padding: /**/ EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -108,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Button(
             actionOnButton: _register,
             buttonText: 'Register',

@@ -48,7 +48,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     const Divider(
                       height: 1,
                     ),
-                    allAccommodationUI()
+                    // allAccommodationUI()
                   ],
                 ),
               ),
@@ -108,7 +108,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           padding:
               const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
           child: Text(
-            'Type of Accommodation',
+            '',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.grey,
@@ -221,10 +221,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
           padding:
               const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
           child: Text(
-            'Distance from city center',
+            'Kapasitas',
             textAlign: TextAlign.left,
             style: TextStyle(
-                color: Colors.grey,
+                color: Colors.black,
                 fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
                 fontWeight: FontWeight.normal),
           ),
@@ -348,7 +348,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Kapasitas',
+            'Waktu Pinjam',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.black,

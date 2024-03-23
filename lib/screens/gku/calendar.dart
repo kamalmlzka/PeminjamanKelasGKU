@@ -109,14 +109,13 @@ class _CalendarState extends State<Calendar>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      Text(
+                                      const Text(
                                         'From',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w100,
                                             fontSize: 16,
                                             color:
-                                                Colors.grey.withOpacity(0.8)),
+                                                Colors.black),
                                       ),
                                       const SizedBox(
                                         height: 4,
@@ -146,13 +145,12 @@ class _CalendarState extends State<Calendar>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      Text(
+                                      const Text(
                                         'To',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w100,
                                             fontSize: 16,
                                             color:
-                                                Colors.grey.withOpacity(0.8)),
+                                                Colors.black),
                                       ),
                                       const SizedBox(
                                         height: 4,

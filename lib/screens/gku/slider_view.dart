@@ -35,7 +35,7 @@ class _SliderViewState extends State<SliderView> {
             SizedBox(
               width: 170,
               child: Text(
-                'Less than ${(distValue / 10).toStringAsFixed(1)} Km',
+                '${(distValue).toInt()} Mahasiswa',
                 textAlign: TextAlign.center,
               ),
             ),
@@ -109,8 +109,7 @@ class CustomThumbShape extends SliderComponentShape {
     );
     canvas.drawPath(
         Path()
-          ..addOval(Rect.fromPoints(
-              Offset(center.dx + 12, center.dy + 12),
+          ..addOval(Rect.fromPoints(Offset(center.dx + 12, center.dy + 12),
               Offset(center.dx - 12, center.dy - 12)))
           ..fillType = PathFillType.evenOdd,
         Paint()

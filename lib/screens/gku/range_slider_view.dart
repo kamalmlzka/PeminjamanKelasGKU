@@ -34,9 +34,9 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                   child: const SizedBox(),
                 ),
                 SizedBox(
-                  width: 54,
+                  width: 65,
                   child: Text(
-                    '${_values!.start.round()}',
+                    '${_values!.start.round()} menit',
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -53,9 +53,9 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                   child: const SizedBox(),
                 ),
                 SizedBox(
-                  width: 54,
+                  width: 65,
                   child: Text(
-                    '${_values!.end.round()}',
+                    '${_values!.end.round()} menit',
                     textAlign: TextAlign.center,
                   ),
                 ),

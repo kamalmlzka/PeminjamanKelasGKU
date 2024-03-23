@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/widgets/ddm.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -66,10 +67,17 @@ class MapScreenState extends State<ProfileScreen>
                                   height: 140.0,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://i.ibb.co/BcbDGRJ/profile.png'),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(70.0),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          'https://i.ibb.co/BcbDGRJ/profile.png',
                                       fit: BoxFit.cover,
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
                                   ),
                                 ),
