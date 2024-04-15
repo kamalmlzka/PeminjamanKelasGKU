@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peminjaman_kelas_gku/widgets/ddm.dart';
+import '/widgets/ddm.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -158,7 +158,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         notification['title'] = 'Peminjaman Kelas Berlangsung';
                         notification['status'] = 'berlangsung';
                       });
-                    } else {
+                    } else if (notification['status'] == 'pending') {
                       // Perform edit action here
                     }
                   },

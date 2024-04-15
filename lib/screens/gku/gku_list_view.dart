@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-
+import '/screens/detail_ruangan.dart';
 import 'gku_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -35,7 +35,7 @@ class GkuListView extends StatelessWidget {
                   left: 24, right: 24, top: 8, bottom: 16),
               child: InkWell(
                 splashColor: Colors.transparent,
-                onTap: callback,
+                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DetailRuangan(gkuData: gkuData)));},
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:peminjaman_kelas_gku/screens/login_screen.dart';
-import 'package:peminjaman_kelas_gku/screens/notifikasi_screen.dart';
-import 'package:peminjaman_kelas_gku/screens/profile_screen.dart';
+import '/screens/login_screen.dart';
+import '/screens/notifikasi_screen.dart';
+import '/screens/profile_screen.dart';
 import '/screens/gku/ruangan_screen.dart';
 import '/screens/home_screen.dart';
 

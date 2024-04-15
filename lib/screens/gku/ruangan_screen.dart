@@ -239,7 +239,7 @@ class _RuanganScreenState extends State<RuanganScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const Text(
-                            'Choose date',
+                            'Pilih Tanggal',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
