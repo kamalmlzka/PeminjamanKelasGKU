@@ -17,21 +17,15 @@ class RuanganScreen extends StatefulWidget {
   _RuanganScreenState createState() => _RuanganScreenState();
 }
 
-class _RuanganScreenState extends State<RuanganScreen>
-    with TickerProviderStateMixin {
+class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<GkuListData> gkuList = GkuListData.gkuList;
+  List<GkuListData> gkuList = [];
   final ScrollController _scrollController = ScrollController();
+  int currentPage = 1;
+  int itemsPerPage = 5; // Initial number of items per page
 
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
-
-  @override
-  void initState() {
-    animationController = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
-    super.initState();
-  }
 
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
@@ -39,9 +33,37 @@ class _RuanganScreenState extends State<RuanganScreen>
   }
 
   @override
+  void initState() {
+    super.initState();
+    fetchData(currentPage, itemsPerPage); // Initial data fetching
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+        // Show "Load More" button when scrolled to the bottom
+        setState(() {});
+      }
+    });
+    animationController = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
+  }
+
+  @override
   void dispose() {
     animationController?.dispose();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  // Fetch data for the given page
+  Future<void> fetchData(int page, int itemsPerPage) async {
+    // Simulated data fetching, replace it with your actual data fetching logic
+    await Future.delayed(const Duration(milliseconds: 200));
+    // Add new items to the list or replace the list with new data
+    setState(() {
+      if (page == 1) {
+        gkuList = GkuListData.gkuList.take(itemsPerPage).toList(); // First page, reset list
+      } else {
+        gkuList.addAll(GkuListData.gkuList.skip((page - 1) * itemsPerPage).take(itemsPerPage)); // Subsequent pages, add more items
+      }
+    });
   }
 
   @override
@@ -65,19 +87,20 @@ class _RuanganScreenState extends State<RuanganScreen>
                   Expanded(
                     child: NestedScrollView(
                       controller: _scrollController,
-                      headerSliverBuilder:
-                          (BuildContext context, bool innerBoxIsScrolled) {
+                      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                         return <Widget>[
                           SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
-                              return Column(
-                                children: <Widget>[
-                                  getSearchBarUI(),
-                                  getTimeDateUI(),
-                                ],
-                              );
-                            }, childCount: 1),
+                              (BuildContext context, int index) {
+                                return Column(
+                                  children: <Widget>[
+                                    getSearchBarUI(),
+                                    getTimeDateUI(),
+                                  ],
+                                );
+                              },
+                              childCount: 1,
+                            ),
                           ),
                           SliverPersistentHeader(
                             pinned: true,
@@ -89,30 +112,40 @@ class _RuanganScreenState extends State<RuanganScreen>
                         ];
                       },
                       body: Container(
-                        color: GkuAppTheme.buildLightTheme()
-                            .colorScheme
-                            .background,
+                        color: GkuAppTheme.buildLightTheme().colorScheme.background,
                         child: ListView.builder(
-                          itemCount: gkuList.length,
+                          itemCount: gkuList.length + 1, // Add 1 for the "Load More" button
                           padding: const EdgeInsets.only(top: 8),
                           scrollDirection: Axis.vertical,
                           itemBuilder: (BuildContext context, int index) {
-                            final int count =
-                                gkuList.length > 10 ? 10 : gkuList.length;
-                            final Animation<double> animation =
-                                Tween<double>(begin: 0.0, end: 1.0).animate(
-                                    CurvedAnimation(
-                                        parent: animationController!,
-                                        curve: Interval(
-                                            (1 / count) * index, 1.0,
-                                            curve: Curves.fastOutSlowIn)));
-                            animationController?.forward();
-                            return GkuListView(
-                              callback: () {},
-                              gkuData: gkuList[index],
-                              animation: animation,
-                              animationController: animationController!,
-                            );
+                            if (index == gkuList.length) {
+                              // Show "Load More" button
+                              return Container(
+                                padding: const EdgeInsets.all(16),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    currentPage++;
+                                    fetchData(currentPage, itemsPerPage);
+                                  },
+                                  child: const Text('Load More'),
+                                ),
+                              );
+                            } else {
+                              final int count = gkuList.length;
+                              final Animation<double> animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+                                CurvedAnimation(
+                                  parent: animationController!,
+                                  curve: Interval((1 / count) * index, 1.0, curve: Curves.fastOutSlowIn),
+                                ),
+                              );
+                              animationController?.forward();
+                              return GkuListView(
+                                callback: () {},
+                                gkuData: gkuList[index],
+                                animation: animation,
+                                animationController: animationController!,
+                              );
+                            }
                           },
                         ),
                       ),
@@ -431,7 +464,7 @@ class _RuanganScreenState extends State<RuanganScreen>
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      '5 Ruangan Ditemukan',
+                      '21 Ruangan Ditemukan',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,

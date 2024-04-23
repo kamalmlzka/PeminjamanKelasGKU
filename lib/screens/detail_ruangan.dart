@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../model/gku_list_data.dart';
-import '../widgets/jadwal_ruangan.dart';
+import '../widgets/ddm.dart';
+import 'jadwal_ruangan.dart';
 import 'gku/gku_app_theme.dart';
 
 class DetailRuangan extends StatelessWidget {
@@ -12,8 +13,9 @@ class DetailRuangan extends StatelessWidget {
   const DetailRuangan({super.key, required this.gkuData});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return DDM(
+      title: 'Detail Ruangan',
+      child: Stack(
         children: <Widget>[
           Container(
               foregroundDecoration: const BoxDecoration(color: Colors.black26),
@@ -160,30 +162,19 @@ class DetailRuangan extends StatelessWidget {
                             "Lihat Jadwal",
                             style: TextStyle(fontWeight: FontWeight.normal),
                           ),
-                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const JadwalRuangan()));},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const JadwalRuangan()));
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
               ],
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              title: const Text(
-                "DETAIL",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.normal),
-              ),
             ),
           ),
           Align(

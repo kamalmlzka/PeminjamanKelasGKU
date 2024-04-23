@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_calendar/booking_calendar.dart';
-import 'package:peminjaman_kelas_gku/widgets/ddm.dart';
+import '../widgets/ddm.dart';
 
 class JadwalRuangan extends StatefulWidget {
   const JadwalRuangan({super.key});
