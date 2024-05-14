@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PeminjamanDetailPage(),
+      home: const PeminjamanDetailPage(),
     );
   }
 }
@@ -24,14 +26,16 @@ class PeminjamanDetailPage extends StatelessWidget {
   final String tanggalWaktuPeminjaman = '22 April 2024, 10:00';
   final String statusPeminjaman = 'Diterima';
 
+  const PeminjamanDetailPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detail Peminjaman'),
+        title: const Text('Detail Peminjaman'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,17 +43,17 @@ class PeminjamanDetailPage extends StatelessWidget {
             Text('Nama Peminjam: $namaPeminjam'),
             Text('Kelas yang Dipinjam: $kelasDipinjam'),
             Text('Tanggal/Waktu Peminjaman: $tanggalWaktuPeminjaman'),
-            SizedBox(height: 16.0),
-            Text('Status Peminjaman:'),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 16.0),
+            const Text('Status Peminjaman:'),
+            const SizedBox(height: 8.0),
             ElevatedButton(
               onPressed: () {
                 // Tambahkan logika untuk tindakan setelah tombol ditekan
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 220, 45, 45),
+                backgroundColor: const Color.fromARGB(255, 220, 45, 45),
               ),
-              child: Text(
+              child: const Text(
                 'Peminjaman Ditolak',
                 style: TextStyle(
                   color: Colors.white, // Ubah warna teks menjadi putih

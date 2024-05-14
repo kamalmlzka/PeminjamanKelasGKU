@@ -93,7 +93,7 @@ class _JadwalRuanganState extends State<JadwalRuangan> {
           hideBreakTime: false,
           loadingWidget: const Text('Fetching data...'),
           uploadingWidget: const CircularProgressIndicator(),
-          startingDayOfWeek: StartingDayOfWeek.tuesday,
+          startingDayOfWeek: StartingDayOfWeek.monday,
           wholeDayIsBookedWidget: const Text('Ruangan Full pada hari ini'),
         ),
       ),

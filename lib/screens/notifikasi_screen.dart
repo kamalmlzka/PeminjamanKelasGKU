@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:peminjaman_kelas_gku/screens/edit_peminjaman.dart';
 import '/widgets/ddm.dart';
+import 'penerimaan_peminjaman.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -110,62 +112,128 @@ class _NotificationScreenState extends State<NotificationScreen> {
     }
 
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: const Icon(Icons.album),
-            title: Text(notification['title']!),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Hari/Tanggal: ${notification['date']}'),
-                Text('Ruang: ${notification['room']}'),
-                Text('Waktu: ${notification['time']}'),
-              ],
-            ),
-          ),
-          ButtonBar(
-            children: <Widget>[
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(cancelButtonColor),
-                ),
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  // Perform cancel action here
-                },
+      child: InkWell(
+        onTap: () {
+          if (notification['status'] == 'accepted') {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PeminjamanDetailPage()));
+          }
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.album),
+              title: Text(notification['title']!),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Hari/Tanggal: ${notification['date']}'),
+                  Text('Ruang: ${notification['room']}'),
+                  Text('Waktu: ${notification['time']}'),
+                ],
               ),
-              if (showEditButton) // Render the edit button conditionally
+            ),
+            ButtonBar(
+              children: <Widget>[
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(actionButtonColor),
+                        MaterialStateProperty.all<Color>(cancelButtonColor),
                   ),
-                  child: Text(
-                    actionButtonText,
-                    style: const TextStyle(color: Colors.white),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    if (notification['status'] == 'accepted') {
-                      // Perform start action here
-                      setState(() {
-                        // Move the notification from 'accepted' to 'berlangsung'
-                        notification['title'] = 'Peminjaman Kelas Berlangsung';
-                        notification['status'] = 'berlangsung';
-                      });
-                    } else if (notification['status'] == 'pending') {
-                      // Perform edit action here
-                    }
+                    // Perform cancel action here
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Konfirmasi Batal Pinjam'),
+                          content: const Text(
+                              'Anda akan membatalkan status peminjaman. Apakah Anda ingin melanjutkan?'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red),
+                              ),
+                              child: const Text(
+                                'Tidak',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  // Remove notification from the list
+                                  notifications.remove(notification);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Colors.green, // Background color
+                              ),
+                              child: const Text(
+                                'Ya',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
-            ],
-          ),
-        ],
+                if (showEditButton) // Render the edit button conditionally
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(actionButtonColor),
+                    ),
+                    child: Text(
+                      actionButtonText,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      if (notification['status'] == 'accepted') {
+                        // Perform start action here
+                        setState(() {
+                          // Move the notification from 'accepted' to 'berlangsung'
+                          notification['title'] =
+                              'Peminjaman Kelas Berlangsung';
+                          notification['status'] = 'berlangsung';
+                        });
+                      } else if (notification['status'] == 'pending') {
+                        // Perform edit action here
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const EditPeminjaman(
+                              bookingNumber:
+                                  '0018', // Provide the booking details
+                              borrowerName: 'Alek',
+                              roomName: 'KU3.01.01',
+                              dateTime: '2024-04-24 14:00',
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

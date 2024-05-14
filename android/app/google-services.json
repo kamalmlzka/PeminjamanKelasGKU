@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "406216199568",
+    "project_id": "peminjamankelasgku",
+    "storage_bucket": "peminjamankelasgku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406216199568:android:cda6a86e632e74d3097715",
+        "android_client_info": {
+          "package_name": "com.example.peminjaman_kelas_gku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Y436AhUsMUxMn1pT505gwS5MMackDUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
