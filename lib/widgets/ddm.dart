@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '/screens/login_screen.dart';
 import '/screens/notifikasi_screen.dart';
 import '/screens/profile_screen.dart';
 import '/screens/gku/ruangan_screen.dart';
 import '/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DDM extends StatelessWidget {
   final Widget child;
@@ -119,12 +118,14 @@ class DDM extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              CupertinoPageRoute(
-                                  builder: (context) => const LoginScreen()),
-                              (_) => false,
-                            );
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            await FirebaseAuth.instance.signOut();
+                            // Navigator.of(context).pushAndRemoveUntil(
+                            //   CupertinoPageRoute(
+                            //       builder: (context) => const LoginScreen()),
+                            //   (_) => false,
+                            // );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green, // Background color

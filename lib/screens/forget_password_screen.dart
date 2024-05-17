@@ -4,8 +4,8 @@ import "package:firebase_auth/firebase_auth.dart";
 import "dart:developer" as dev;
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:peminjaman_kelas_gku/widgets/ddm.dart";
 import "/screens/login_screen.dart";
-import "/widgets/background_shapes.dart";
 
 import "/widgets/button.dart";
 import "/widgets/login_form.dart";
@@ -41,10 +41,10 @@ class _ForgetPasswordScreen extends State<ForgetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundShapes(
+    return DDM(
+      title: 'Pulihkan Password',
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(),
         body: SafeArea(
           child: Center(
             child: Form(
@@ -61,7 +61,7 @@ class _ForgetPasswordScreen extends State<ForgetPasswordScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Get Back your Account!",
+                          "Lupa Password?",
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
@@ -80,7 +80,7 @@ class _ForgetPasswordScreen extends State<ForgetPasswordScreen> {
                   const SizedBox(height: 10.0),
                   Button(
                     actionOnButton: _sendMail,
-                    buttonText: "Get Password Reset Link",
+                    buttonText: "Reset Password",
                   )
                 ],
               ),

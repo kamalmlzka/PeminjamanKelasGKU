@@ -46,6 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
         } else if (e.code == 'invalid-credential') {
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Check your Credentials")));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(e.code)),
+          );
         }
       } catch (e) {
         if (kDebugMode) {
