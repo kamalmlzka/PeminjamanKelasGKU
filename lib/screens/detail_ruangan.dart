@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:peminjaman_kelas_gku/services/get_image.dart';
 
 import '../model/gku_list_data.dart';
 import '../widgets/ddm.dart';
@@ -20,7 +21,7 @@ class DetailRuangan extends StatelessWidget {
           Container(
               foregroundDecoration: const BoxDecoration(color: Colors.black26),
               height: 400,
-              child: Image.network(gkuData!.imagePath, fit: BoxFit.cover)),
+              child: const GetImage('Auditorium.jpg')),
           SingleChildScrollView(
             padding: const EdgeInsets.only(top: 16.0, bottom: 20.0),
             child: Column(

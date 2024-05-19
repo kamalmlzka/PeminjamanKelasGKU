@@ -1,16 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../services/get_ajusted_image.dart';
 import '/widgets/button.dart';
 import '/widgets/ddm.dart';
 import 'gku/ruangan_screen.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
-final List<String> imgList = [
-  'https://i.ibb.co/qsSrkqy/14052609-611006929102219-627606034613010432-n.jpg',
-  'https://i.ibb.co/qsSrkqy/14052609-611006929102219-627606034613010432-n.jpg',
-  'https://i.ibb.co/qsSrkqy/14052609-611006929102219-627606034613010432-n.jpg',
-  'https://i.ibb.co/qsSrkqy/14052609-611006929102219-627606034613010432-n.jpg',
-  'https://i.ibb.co/qsSrkqy/14052609-611006929102219-627606034613010432-n.jpg'
+final List<Widget> imgList = [
+  const GetAdjustedImage('gku.jpeg'),
+  const GetAdjustedImage('gku.jpeg'),
+  const GetAdjustedImage('gku.jpeg'),
+  const GetAdjustedImage('gku.jpeg'),
+  const GetAdjustedImage('gku.jpeg'),
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -38,17 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               items: imgList.map((item) {
                 return Stack(
                   children: [
-                    CachedNetworkImage(
-                      height: size.height,
-                      width: size.width,
-                      imageUrl: item,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                      fit: BoxFit.cover,
-                    ),
+                    item,
                     Container(
                       height: size.height,
                       width: size.width,

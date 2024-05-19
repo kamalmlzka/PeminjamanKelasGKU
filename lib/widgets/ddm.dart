@@ -110,7 +110,7 @@ class DDM extends StatelessWidget {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.red),
+                                WidgetStateProperty.all<Color>(Colors.red),
                           ),
                           child: const Text(
                             'Tidak',

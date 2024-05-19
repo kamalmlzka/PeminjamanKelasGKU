@@ -1,3 +1,5 @@
+import 'package:peminjaman_kelas_gku/crud/get_gku_list_data.dart';
+
 import 'gku_list_view.dart';
 import '/widgets/ddm.dart';
 
@@ -17,12 +19,16 @@ class RuanganScreen extends StatefulWidget {
   _RuanganScreenState createState() => _RuanganScreenState();
 }
 
-class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateMixin {
+class _RuanganScreenState extends State<RuanganScreen>
+    with SingleTickerProviderStateMixin {
   AnimationController? animationController;
-  List<GkuListData> gkuList = [];
   final ScrollController _scrollController = ScrollController();
+
+  List<GkuListData> gkuList = [];
   int currentPage = 1;
-  int itemsPerPage = 5; // Initial number of items per page
+  final int itemsPerPage = 5;
+  bool isLoading = false;
+  final GetGKUListData getGKUListData = GetGKUListData();
 
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
@@ -32,17 +38,33 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
     return true;
   }
 
+  Future<void> fetchData(int page, int itemsPerPage) async {
+    setState(() {
+      isLoading = true;
+    });
+    List<GkuListData> newItems =
+        await getGKUListData.fetchGkuListData(page, itemsPerPage);
+    setState(() {
+      gkuList.addAll(newItems);
+      isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    fetchData(currentPage, itemsPerPage); // Initial data fetching
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
         // Show "Load More" button when scrolled to the bottom
         setState(() {});
       }
     });
-    animationController = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
+    animationController = AnimationController(
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+    fetchData(currentPage, itemsPerPage); // Initial data fetching
   }
 
   @override
@@ -53,18 +75,18 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
   }
 
   // Fetch data for the given page
-  Future<void> fetchData(int page, int itemsPerPage) async {
-    // Simulated data fetching, replace it with your actual data fetching logic
-    await Future.delayed(const Duration(milliseconds: 200));
-    // Add new items to the list or replace the list with new data
-    setState(() {
-      if (page == 1) {
-        gkuList = GkuListData.gkuList.take(itemsPerPage).toList(); // First page, reset list
-      } else {
-        gkuList.addAll(GkuListData.gkuList.skip((page - 1) * itemsPerPage).take(itemsPerPage)); // Subsequent pages, add more items
-      }
-    });
-  }
+  // Future<void> fetchData(int page, int itemsPerPage) async {
+  //   // Simulated data fetching, replace it with your actual data fetching logic
+  //   await Future.delayed(const Duration(milliseconds: 200));
+  //   // Add new items to the list or replace the list with new data
+  //   setState(() {
+  //     if (page == 1) {
+  //       gkuList = GkuListData.gkuList.take(itemsPerPage).toList(); // First page, reset list
+  //     } else {
+  //       gkuList.addAll(GkuListData.gkuList.skip((page - 1) * itemsPerPage).take(itemsPerPage)); // Subsequent pages, add more items
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +109,8 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
                   Expanded(
                     child: NestedScrollView(
                       controller: _scrollController,
-                      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                      headerSliverBuilder:
+                          (BuildContext context, bool innerBoxIsScrolled) {
                         return <Widget>[
                           SliverList(
                             delegate: SliverChildBuilderDelegate(
@@ -112,9 +135,11 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
                         ];
                       },
                       body: Container(
-                        color: GkuAppTheme.buildLightTheme().colorScheme.background,
+                        color:
+                            GkuAppTheme.buildLightTheme().colorScheme.surface,
                         child: ListView.builder(
-                          itemCount: gkuList.length + 1, // Add 1 for the "Load More" button
+                          itemCount: gkuList.length +
+                              1, // Add 1 for the "Load More" button
                           padding: const EdgeInsets.only(top: 8),
                           scrollDirection: Axis.vertical,
                           itemBuilder: (BuildContext context, int index) {
@@ -123,19 +148,25 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
                               return Container(
                                 padding: const EdgeInsets.all(16),
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    currentPage++;
-                                    fetchData(currentPage, itemsPerPage);
-                                  },
-                                  child: const Text('Load More'),
+                                  onPressed: isLoading
+                                      ? null
+                                      : () {
+                                          currentPage++;
+                                          fetchData(currentPage, itemsPerPage);
+                                        },
+                                  child: isLoading
+                                      ? const CircularProgressIndicator()
+                                      : const Text('Load More'),
                                 ),
                               );
                             } else {
                               final int count = gkuList.length;
-                              final Animation<double> animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+                              final Animation<double> animation =
+                                  Tween<double>(begin: 0.0, end: 1.0).animate(
                                 CurvedAnimation(
                                   parent: animationController!,
-                                  curve: Interval((1 / count) * index, 1.0, curve: Curves.fastOutSlowIn),
+                                  curve: Interval((1 / count) * index, 1.0,
+                                      curve: Curves.fastOutSlowIn),
                                 ),
                               );
                               animationController?.forward();
@@ -143,7 +174,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
                                 callback: () {},
                                 gkuData: gkuList[index],
                                 animation: animation,
-                                animationController: animationController!,
+                                animationController: animationController,
                               );
                             }
                           },
@@ -163,7 +194,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
   Widget getListUI() {
     return Container(
       decoration: BoxDecoration(
-        color: GkuAppTheme.buildLightTheme().colorScheme.background,
+        color: GkuAppTheme.buildLightTheme().colorScheme.surface,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -367,7 +398,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: GkuAppTheme.buildLightTheme().colorScheme.background,
+                  color: GkuAppTheme.buildLightTheme().colorScheme.surface,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(38.0),
                   ),
@@ -422,8 +453,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
                   padding: const EdgeInsets.all(16.0),
                   child: Icon(FontAwesomeIcons.magnifyingGlass,
                       size: 20,
-                      color:
-                          GkuAppTheme.buildLightTheme().colorScheme.background),
+                      color: GkuAppTheme.buildLightTheme().colorScheme.surface),
                 ),
               ),
             ),
@@ -443,7 +473,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
           child: Container(
             height: 24,
             decoration: BoxDecoration(
-              color: GkuAppTheme.buildLightTheme().colorScheme.background,
+              color: GkuAppTheme.buildLightTheme().colorScheme.surface,
               boxShadow: <BoxShadow>[
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
@@ -454,7 +484,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
           ),
         ),
         Container(
-          color: GkuAppTheme.buildLightTheme().colorScheme.background,
+          color: GkuAppTheme.buildLightTheme().colorScheme.surface,
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
@@ -553,7 +583,7 @@ class _RuanganScreenState extends State<RuanganScreen> with TickerProviderStateM
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: GkuAppTheme.buildLightTheme().colorScheme.background,
+        color: GkuAppTheme.buildLightTheme().colorScheme.surface,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),

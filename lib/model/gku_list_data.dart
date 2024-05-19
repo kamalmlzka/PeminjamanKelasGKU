@@ -1,188 +1,37 @@
 class GkuListData {
-  GkuListData({
-    this.imagePath = '',
-    this.titleTxt = '',
-    this.subTxt = "",
-    this.reviews = 80,
-    this.rating = 4.5,
-    this.kapasitas = 40,
-  });
-
-  String imagePath;
   String titleTxt;
   String subTxt;
   double rating;
   int reviews;
   int kapasitas;
 
-  static List<GkuListData> gkuList = <GkuListData>[
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.01',
-      subTxt: 'GKU',
-      reviews: 80,
-      rating: 4.4,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.02',
-      subTxt: 'GKU',
-      reviews: 74,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.03',
-      subTxt: 'GKU',
-      reviews: 62,
-      rating: 4.0,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.04',
-      subTxt: 'GKU',
-      reviews: 90,
-      rating: 4.4,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.05',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.06',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.07',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.08',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.09',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.10',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.11',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.12',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.13',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.14',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.15',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.16',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.17',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.18',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.19',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.20',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-    GkuListData(
-      imagePath: 'https://i.ibb.co/tc3VN4M/Auditorium.jpg',
-      titleTxt: 'KU3.01.21',
-      subTxt: 'GKU',
-      reviews: 240,
-      rating: 4.5,
-      kapasitas: 40,
-    ),
-  ];
+  GkuListData({
+    required this.titleTxt,
+    required this.subTxt,
+    required this.reviews,
+    required this.rating,
+    required this.kapasitas,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'titleTxt': titleTxt,
+      'subTxt': subTxt,
+      'rating': rating,
+      'reviews': reviews,
+      'kapasitas': kapasitas,
+    };
+  }
+
+  factory GkuListData.fromMap(Map<String, dynamic> map) {
+    return GkuListData(
+      titleTxt: map['titleTxt'],
+      subTxt: map['subTxt'],
+      rating: map['rating'],
+      reviews: map['reviews'],
+      kapasitas: map['kapasitas'],
+    );
+  }
+
+  
 }

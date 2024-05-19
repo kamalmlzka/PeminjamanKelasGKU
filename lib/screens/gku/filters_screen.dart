@@ -26,7 +26,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: GkuAppTheme.buildLightTheme().colorScheme.background,
+      color: GkuAppTheme.buildLightTheme().colorScheme.surface,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -372,7 +372,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: GkuAppTheme.buildLightTheme().colorScheme.background,
+        color: GkuAppTheme.buildLightTheme().colorScheme.surface,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),

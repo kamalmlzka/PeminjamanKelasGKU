@@ -1,6 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:peminjaman_kelas_gku/services/get_image.dart';
 import '/widgets/ddm.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
+String? _extractUsername() {
+  String? email = FirebaseAuth.instance.currentUser?.email;
+
+  if (email != null && email.contains('@')) {
+    return email.split('@')[0];
+  }
+  return null;
+}
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -70,15 +80,7 @@ class MapScreenState extends State<ProfileScreen>
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(70.0),
-                                    child: CachedNetworkImage(
-                                      imageUrl:
-                                          'https://i.ibb.co/BcbDGRJ/profile.png',
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
-                                    ),
+                                    child: const GetImage('profile.png'),
                                   ),
                                 ),
                               ],
@@ -125,7 +127,7 @@ class MapScreenState extends State<ProfileScreen>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       Text(
-                                        'Parsonal Information',
+                                        'Personal Information',
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.bold),
@@ -169,8 +171,8 @@ class MapScreenState extends State<ProfileScreen>
                                 children: <Widget>[
                                   Flexible(
                                     child: TextField(
-                                      decoration: const InputDecoration(
-                                        hintText: "alek",
+                                      decoration: InputDecoration(
+                                        hintText: _extractUsername(),
                                       ),
                                       enabled: !_status,
                                       autofocus: !_status,
@@ -206,9 +208,9 @@ class MapScreenState extends State<ProfileScreen>
                                 children: <Widget>[
                                   Flexible(
                                     child: TextField(
-                                      decoration: const InputDecoration(
-                                          hintText:
-                                              "alek@student.telkomuniversity.ac.id"),
+                                      decoration: InputDecoration(
+                                          hintText: FirebaseAuth
+                                              .instance.currentUser?.email),
                                       enabled: !_status,
                                     ),
                                   ),

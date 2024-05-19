@@ -141,7 +141,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(cancelButtonColor),
+                        WidgetStateProperty.all<Color>(cancelButtonColor),
                   ),
                   child: const Text(
                     'Cancel',
@@ -163,7 +163,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               },
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
+                                    WidgetStateProperty.all<Color>(
                                         Colors.red),
                               ),
                               child: const Text(
@@ -198,7 +198,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(actionButtonColor),
+                          WidgetStateProperty.all<Color>(actionButtonColor),
                     ),
                     child: Text(
                       actionButtonText,

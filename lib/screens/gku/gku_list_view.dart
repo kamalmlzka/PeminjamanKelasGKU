@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:peminjaman_kelas_gku/services/get_image.dart';
 import '/screens/detail_ruangan.dart';
 import 'gku_app_theme.dart';
 import 'package:flutter/material.dart';
@@ -53,17 +54,14 @@ class GkuListView extends StatelessWidget {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            AspectRatio(
+                            const AspectRatio(
                               aspectRatio: 2,
-                              child: Image.network(
-                                gkuData!.imagePath,
-                                fit: BoxFit.cover,
+                              child: GetImage('Auditorium.jpg'),
                               ),
-                            ),
                             Container(
                               color: GkuAppTheme.buildLightTheme()
                                   .colorScheme
-                                  .background,
+                                  .surface,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,

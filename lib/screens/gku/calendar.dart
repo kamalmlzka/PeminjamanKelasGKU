@@ -82,7 +82,7 @@ class _CalendarState extends State<Calendar>
                       decoration: BoxDecoration(
                         color: GkuAppTheme.buildLightTheme()
                             .colorScheme
-                            .background,
+                            .surface,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(24.0)),
                         boxShadow: <BoxShadow>[
