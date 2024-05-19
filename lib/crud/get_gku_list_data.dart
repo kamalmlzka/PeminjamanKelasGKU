@@ -5,10 +5,6 @@ class GetGKUListData {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   DocumentSnapshot? lastDocument;
 
-  Future<void> addGkuListData(GkuListData data) async {
-    await _db.collection('gku_list').add(data.toMap());
-  }
-
   Future<List<GkuListData>> fetchGkuListData(int page, int itemsPerPage) async {
     Query query = _db
         .collection('gku_list')

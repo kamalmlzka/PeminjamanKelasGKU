@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '/screens/notifikasi_screen.dart';
+import '/screens/pinjam/status_pinjam.dart';
 import '/screens/profile_screen.dart';
 import '/screens/gku/ruangan_screen.dart';
 import '/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '/screens/pinjam/riwayat_pinjam.dart';
 
 class DDM extends StatelessWidget {
   final Widget child;
@@ -73,13 +74,23 @@ class DDM extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Notifikasi'),
+              title: const Text('Status Pinjam'),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StatusPinjam()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Riwayat Pinjam'),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const NotificationScreen()),
+                      builder: (context) => const RiwayatPinjam()),
                 );
               },
             ),
@@ -89,7 +100,8 @@ class DDM extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()),
                 );
               },
             ),

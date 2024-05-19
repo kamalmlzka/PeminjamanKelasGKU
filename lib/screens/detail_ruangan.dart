@@ -5,7 +5,7 @@ import 'package:peminjaman_kelas_gku/services/get_image.dart';
 
 import '../model/gku_list_data.dart';
 import '../widgets/ddm.dart';
-import 'jadwal_ruangan.dart';
+import 'pinjam/pinjam_ruangan.dart';
 import 'gku/gku_app_theme.dart';
 
 class DetailRuangan extends StatelessWidget {
@@ -168,7 +168,7 @@ class DetailRuangan extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const JadwalRuangan()));
+                                        PinjamRuangan(gkuData: gkuData)));
                           },
                         ),
                       ),
