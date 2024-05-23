@@ -6,12 +6,12 @@ import 'package:intl/intl.dart';
 class UpdateTimeSlots {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  static Future<void> insertSlots(String date,List<String> selectedSlots,bool available) async {
+  static Future<void> insertSlots(String date, List<String> selectedSlots, bool available, String ruang) async {
     try {
-      DocumentReference documentReference = _firestore.collection("timeSlots")
+      DocumentReference documentReference = _firestore.collection("slotJadwal")
           .doc(date)
-          .collection("availability")
-          .doc("slots");
+          .collection("jadwal")
+          .doc(ruang);
       DocumentSnapshot snapshot = await documentReference.get();
       Map<String,dynamic> data = snapshot.data() as Map<String,dynamic>;
 
@@ -26,7 +26,7 @@ class UpdateTimeSlots {
     }
   }
 
-  static Future<void> deleteSlot(String dateFromActivity,List<dynamic> selectedSlots,bool available) async {
+  static Future<void> deleteSlot(String dateFromActivity,List<dynamic> selectedSlots,bool available, String ruang) async {
 
     try {
 
@@ -34,10 +34,10 @@ class UpdateTimeSlots {
       String date = DateFormat('yyyy-MM-dd').format(myDate);
       dev.log(date,name: "Date");
 
-      DocumentReference documentReference = _firestore.collection("timeSlots")
+      DocumentReference documentReference = _firestore.collection("slotJadwal")
           .doc(date)
-          .collection("availability")
-          .doc("slots");
+          .collection("jadwal")
+          .doc(ruang);
 
       DocumentSnapshot snapshot = await documentReference.get();
       Map<String,dynamic> data = snapshot.data() as Map<String,dynamic>;

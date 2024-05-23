@@ -75,7 +75,7 @@ class _ForgetPasswordScreen extends State<ForgetPasswordScreen> {
                     controller: mail,
                     label: "Email",
                     readOnly: false,
-                    obscureText: false,
+                    obscureText: false, isPassword: true,
                   ),
                   const SizedBox(height: 10.0),
                   Button(

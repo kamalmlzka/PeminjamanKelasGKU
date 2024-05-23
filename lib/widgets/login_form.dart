@@ -1,20 +1,28 @@
 import "package:flutter/material.dart";
 
-class LoginForm extends StatelessWidget {
+// ignore: must_be_immutable
+class LoginForm extends StatefulWidget {
   final TextEditingController controller;
   final String label;
   final bool readOnly;
-  final bool obscureText;
+  bool obscureText;
+  final bool isPassword;
   final Function()? onTap;
 
-  const LoginForm(
+  LoginForm(
       {super.key,
       required this.controller,
       required this.label,
       required this.readOnly,
       required this.obscureText,
+      required this.isPassword,
       this.onTap});
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,20 +36,34 @@ class LoginForm extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0),
           child: TextFormField(
-            validator: (value){
-              if(value == null || value.isEmpty){
-                
-                return "Enter $label";
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Enter ${widget.label}";
               }
               return null;
             },
-            controller: controller,
-            obscureText: obscureText,
-            onTap: onTap,
+            controller: widget.controller,
+            obscureText: widget.obscureText,
+            onTap: widget.onTap,
             autofocus: false,
-            readOnly: readOnly,
+            readOnly: widget.readOnly,
             decoration: InputDecoration(
-              hintText: label,
+              hintText: widget.label,
+              suffixIcon: widget.isPassword
+                  ? GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          widget.obscureText = !widget.obscureText;
+                        });
+                      },
+                      child: Icon(
+                        widget.obscureText
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                    )
+                  : null,
               border: InputBorder.none,
             ),
           ),

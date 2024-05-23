@@ -4,10 +4,9 @@ import '/model/model_pinjam.dart';
 import '/widgets/ui/ticket_painter.dart';
 
 class TicketUI extends StatelessWidget {
-
   final ModelPinjam modelPinjam;
 
-  const TicketUI({required this.modelPinjam,super.key});
+  const TicketUI({required this.modelPinjam, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class TicketUI extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Summary : Tanggal dan Jadwal',
+                    'Summary',
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,

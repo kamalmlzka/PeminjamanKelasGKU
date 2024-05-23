@@ -18,18 +18,16 @@ class BuildListBuilder extends StatelessWidget {
       required this.uid,
       super.key});
 
-  Future<void> deleteDetails(String uid, String pinjamId, String date,
-      List<dynamic> selectedSlots) async {
+  Future<void> deleteDetails(String uid, String pinjamId, String date, List<dynamic> selectedSlots, ruang) async {
     dev.log(selectedSlots.first, name: "Slots From Call");
     await DeleteUserBooking.deleteUserBooking(uid, pinjamId);
     await DeleteUserBooking.deleteBooking(date, pinjamId);
-    await UpdateTimeSlots.deleteSlot(date, selectedSlots, true);
+    await UpdateTimeSlots.deleteSlot(date, selectedSlots, true, ruang);
   }
 
-  void deleteBooking(
-      String uid, String pinjamId, String date, List<dynamic> selectedSlots) {
+  void deleteBooking(String uid, String pinjamId, String date, List<dynamic> selectedSlots, ruang) {
     dev.log(selectedSlots.first, name: "Slots");
-    deleteDetails(uid, pinjamId, date, selectedSlots);
+    deleteDetails(uid, pinjamId, date, selectedSlots, ruang);
   }
 
   @override
@@ -55,19 +53,19 @@ class BuildListBuilder extends StatelessWidget {
                     Text(
                       "${data['pinjamId']}",
                       style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                          fontWeight: FontWeight.bold, fontSize: 14),
                     ),
                     Text(
                       "${data['kodeRuangan']}",
                       style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                          fontWeight: FontWeight.bold, fontSize: 14),
                     ),
                     Text("${data['date']}",
                         style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
+                            fontWeight: FontWeight.bold, fontSize: 14)),
                     Text("Jadwal: ${data['slots'].join(', ')}",
                         style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
+                            fontWeight: FontWeight.bold, fontSize: 14)),
                   ],
                 ),
                 if (isDelete) const Spacer(),
@@ -76,7 +74,7 @@ class BuildListBuilder extends StatelessWidget {
                     icon: const Icon(Icons.delete),
                     onPressed: () {
                       deleteBooking(
-                          uid, data['pinjamId'], data['date'], data['slots']);
+                          uid, data['pinjamId'], data['date'], data['slots'], data['kodeRuangan']);
                     },
                   )
               ],

@@ -32,6 +32,4 @@ class GkuListData {
       kapasitas: map['kapasitas'],
     );
   }
-
-  
 }

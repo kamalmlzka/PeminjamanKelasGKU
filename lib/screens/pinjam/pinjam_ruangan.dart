@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "/model/gku_list_data.dart";
 import "verify_screen.dart";
-import "/services/fetch_alloted_slots.dart";
+import "../../services/fetch_slots.dart";
 import "/services/fetch_user_pinjam.dart";
 import "/services/update_time_slots.dart";
 import "/services/generate/generate_time_key.dart";
@@ -43,6 +43,8 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
   TextEditingController date = TextEditingController();
   List<String> selectedSlots = [];
   final _formKey = GlobalKey<FormState>();
+
+  String get ruang => kodeRuang;
 
   @override
   void initState() {
@@ -86,6 +88,7 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
         dev.log(slotCount.toString(), name: "Slots");
 
         if (filteredSnapshots.isEmpty) {
+          dev.log("filteredsnapsot empty");
           performSubmission();
         } else if (filteredSnapshots.length == slotCount) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -102,7 +105,14 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
             dev.log(selectedSlots.length.toString(),
                 name: "SLOT LENGTH FROM FINAL");
             if (((slotCount - slotCounter) >= selectedSlots.length)) {
-              performSubmission();
+              dev.log("$slotCounter, $slotCount, ${selectedSlots.length}");
+              if (selectedSlots.length <= slotCount - slotCounter) {
+                performSubmission();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                        "Remaining Slots available for this week is ${slotCount - slotCounter}")));
+              }
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(
@@ -148,7 +158,8 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
         date: date.text, pinjamId: pinjamId, bookingData: bookingData);
 
     DateTime myDate = DateFormat("dd-MM-yyyy").parse(date.text);
-    updateTimeSlots(DateFormat('yyyy-MM-dd').format(myDate), selectedSlots);
+    updateTimeSlots(
+        DateFormat('yyyy-MM-dd').format(myDate), selectedSlots, ruang);
 
     Navigator.pop(context);
 
@@ -162,16 +173,19 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
     ), (route) => false);
   }
 
-  Future<void> fetchTimeSlots(String date) async {
+  Future<void> fetchTimeSlots(String date, String ruang) async {
     setState(() {
       timeSlots = {};
     });
-    timeSlots = await FetchTimeSlots.fetchTimeSlots(date);
+    timeSlots = await FetchTimeSlots.fetchTimeSlots(date, ruang);
     setState(() {});
   }
 
-  Future<void> updateTimeSlots(String date, List<String> selectedSlots) async {
-    await UpdateTimeSlots.insertSlots(date, selectedSlots, false);
+  Future<void> updateTimeSlots(
+      String date, List<String> selectedSlots, String ruang) async {
+    setState(() async {
+      await UpdateTimeSlots.insertSlots(date, selectedSlots, false, ruang);
+    });
   }
 
   void _selectSlots(String slot) {
@@ -200,7 +214,7 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
         selectedSlots.clear();
       });
       dev.log(getWeekNumber(date.text), name: "Date");
-      await fetchTimeSlots(picker.toString().split(" ")[0]);
+      await fetchTimeSlots(picker.toString().split(" ")[0], ruang);
     }
   }
 
@@ -222,7 +236,7 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
   }
 
   Future<int> _getSlots(String uid) async {
-    int slots = await FetchAllottedSlots.getAllottedSlots(uid);
+    int slots = await FetchSlots.getAllottedSlots(uid);
     return slots;
   }
 

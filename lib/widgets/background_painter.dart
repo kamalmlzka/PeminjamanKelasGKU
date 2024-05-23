@@ -19,9 +19,10 @@ class BackgroundPainter extends CustomPainter {
       BlurStyle.normal,
       30,
     );
-    drawShape1(canvas, size, paint, const Color.fromARGB(255, 131, 22, 22));
-    drawShape2(canvas, size, paint, const Color.fromARGB(255, 255, 255, 255));
-    drawShape3(canvas, size, paint, const Color.fromARGB(255, 150, 150, 150));
+    drawShape1(canvas, size, paint, const Color(0xffb6252a));
+    drawShape2(canvas, size, paint, const Color(0xffed1e28));
+    drawShape3(canvas, size, paint, const Color(0xff55565b));
+    drawShape4(canvas, size, paint, const Color(0xff959597));
   }
 
   @override
@@ -30,11 +31,11 @@ class BackgroundPainter extends CustomPainter {
   }
 
   void drawShape1(
-      Canvas canvas,
-      Size size,
-      Paint paint,
-      Color color,
-      ) {
+    Canvas canvas,
+    Size size,
+    Paint paint,
+    Color color,
+  ) {
     paint.color = color;
     Path path = Path();
 
@@ -51,11 +52,11 @@ class BackgroundPainter extends CustomPainter {
   }
 
   void drawShape2(
-      Canvas canvas,
-      Size size,
-      Paint paint,
-      Color color,
-      ) {
+    Canvas canvas,
+    Size size,
+    Paint paint,
+    Color color,
+  ) {
     paint.color = color;
     Path path = Path();
 
@@ -72,11 +73,11 @@ class BackgroundPainter extends CustomPainter {
   }
 
   void drawShape3(
-      Canvas canvas,
-      Size size,
-      Paint paint,
-      Color color,
-      ) {
+    Canvas canvas,
+    Size size,
+    Paint paint,
+    Color color,
+  ) {
     paint.color = color;
     Path path = Path();
 
@@ -90,5 +91,22 @@ class BackgroundPainter extends CustomPainter {
 
     final offset = getOffset(path);
     canvas.drawCircle(offset, 250, paint);
+  }
+
+  void drawShape4(Canvas canvas, Size size, Paint paint, Color color) {
+    paint.color = color;
+    Path path = Path();
+
+    path.moveTo(size.width, size.height / 2);
+    path.quadraticBezierTo(
+      size.width / 2,
+      size.height / 1.5,
+      size.width / 4,
+      size.height,
+    );
+
+    final offset = getOffset(path);
+
+    canvas.drawCircle(offset, 200, paint);
   }
 }

@@ -4,7 +4,7 @@ import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:peminjaman_kelas_gku/widgets/ddm.dart";
+import "/widgets/ddm.dart";
 import "forget_password_screen.dart";
 
 import "/widgets/button.dart";
@@ -105,14 +105,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: userName,
                       label: "Email",
                       readOnly: false,
-                      obscureText: false,
+                      obscureText: false, isPassword: false,
                     ),
                     const SizedBox(height: 10.0),
                     LoginForm(
                       controller: password,
                       label: "Password",
                       readOnly: false,
-                      obscureText: true,
+                      obscureText: true, isPassword: true,
                     ),
                     const SizedBox(height: 10.0),
                     GestureDetector(
