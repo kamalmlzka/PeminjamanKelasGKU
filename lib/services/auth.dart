@@ -1,7 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "../screens/home_screen.dart";
-import "../screens/login_screen.dart";
+import "/screens/home_screen.dart";
+import "/screens/login_screen.dart";
 
 
 class Auth extends StatelessWidget {

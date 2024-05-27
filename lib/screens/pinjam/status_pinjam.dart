@@ -2,9 +2,9 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
-import "package:peminjaman_kelas_gku/screens/home_screen.dart";
-import "package:peminjaman_kelas_gku/widgets/ddm.dart";
-import "/widgets/build_list_builder.dart";
+import "/screens/home_screen.dart";
+import "/widgets/ddm.dart";
+import "/widgets/list_builder.dart";
 import "dart:developer" as dev;
 
 import "/services/fetch_user_pinjam.dart";
@@ -92,7 +92,7 @@ class _StatusPinjamState extends State<StatusPinjam> {
               );
             }
 
-            return BuildListBuilder(
+            return ListBuilder(
               bookings: bookings,
               isDelete: true,
               uid: uid,

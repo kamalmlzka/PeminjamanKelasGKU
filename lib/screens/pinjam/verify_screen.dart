@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:peminjaman_kelas_gku/screens/home_screen.dart";
-import "/widgets/build_ticket_ui.dart";
+import "/screens/home_screen.dart";
+import "/widgets/ticket_ui.dart";
 // import "package:ticket_widget/ticket_widget.dart";
 
-import "/model/model_pinjam.dart";
+import "/models/model_pinjam.dart";
 import "/widgets/ddm.dart";
 import "/widgets/button.dart";
 // import "/widgets/build_report_details.dart";

@@ -1,10 +1,10 @@
-import 'package:peminjaman_kelas_gku/crud/get_gku_list_data.dart';
+import '/services/get_gku_list_data.dart';
 
 import 'gku_list_view.dart';
 import '/widgets/ddm.dart';
 
 import 'calendar.dart';
-import '/model/gku_list_data.dart';
+import '/models/gku_list_data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';

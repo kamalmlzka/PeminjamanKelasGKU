@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '/model/model_pinjam.dart';
+import '/models/model_pinjam.dart';
 import '/widgets/ui/ticket_painter.dart';
 
 class TicketUI extends StatelessWidget {

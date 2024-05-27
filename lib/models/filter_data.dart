@@ -1,5 +1,5 @@
-class PopularFilterListData {
-  PopularFilterListData({
+class FilterData {
+  FilterData({
     this.titleTxt = '',
     this.isSelected = false,
   });
@@ -7,51 +7,51 @@ class PopularFilterListData {
   String titleTxt;
   bool isSelected;
 
-  static List<PopularFilterListData> popularFList = <PopularFilterListData>[
-    PopularFilterListData(
+  static List<FilterData> popularFList = <FilterData>[
+    FilterData(
       titleTxt: 'Proyektor',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Air Conditioner',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Speaker & Mic',
       isSelected: true,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Whiteboard',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Wifi',
       isSelected: false,
     ),
   ];
 
-  static List<PopularFilterListData> accomodationList = [
-    PopularFilterListData(
+  static List<FilterData> accomodationList = [
+    FilterData(
       titleTxt: 'All',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Apartment',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Home',
       isSelected: true,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Villa',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Hotel',
       isSelected: false,
     ),
-    PopularFilterListData(
+    FilterData(
       titleTxt: 'Resort',
       isSelected: false,
     ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'range_slider_view.dart';
 import 'slider_view.dart';
 import 'gku_app_theme.dart';
-import '/model/popular_filter_list.dart';
+import '/models/filter_data.dart';
 
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
@@ -15,10 +15,10 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  List<PopularFilterListData> popularFilterListData =
-      PopularFilterListData.popularFList;
-  List<PopularFilterListData> accomodationListData =
-      PopularFilterListData.accomodationList;
+  List<FilterData> popularFilterListData =
+      FilterData.popularFList;
+  List<FilterData> accomodationListData =
+      FilterData.accomodationList;
 
   RangeValues _values = const RangeValues(100, 600);
   double distValue = 50.0;
@@ -132,7 +132,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   List<Widget> getAccomodationListUI() {
     final List<Widget> noList = <Widget>[];
     for (int i = 0; i < accomodationListData.length; i++) {
-      final PopularFilterListData date = accomodationListData[i];
+      final FilterData date = accomodationListData[i];
       noList.add(
         Material(
           color: Colors.transparent,
@@ -197,7 +197,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
       int count = 0;
       for (int i = 0; i < accomodationListData.length; i++) {
         if (i != 0) {
-          final PopularFilterListData data = accomodationListData[i];
+          final FilterData data = accomodationListData[i];
           if (data.isSelected) {
             count += 1;
           }
@@ -280,7 +280,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
       final List<Widget> listUI = <Widget>[];
       for (int i = 0; i < columnCount; i++) {
         try {
-          final PopularFilterListData date = popularFilterListData[count];
+          final FilterData date = popularFilterListData[count];
           listUI.add(Expanded(
             child: Row(
               children: <Widget>[

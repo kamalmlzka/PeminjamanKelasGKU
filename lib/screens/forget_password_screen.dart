@@ -4,7 +4,7 @@ import "package:firebase_auth/firebase_auth.dart";
 import "dart:developer" as dev;
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:peminjaman_kelas_gku/widgets/ddm.dart";
+import "/widgets/ddm.dart";
 import "/screens/login_screen.dart";
 
 import "/widgets/button.dart";

@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import '../services/get_ajusted_image.dart';
+import '/services/get_ajusted_image.dart';
 import '/widgets/button.dart';
 import '/widgets/ddm.dart';
 import 'gku/ruangan_screen.dart';

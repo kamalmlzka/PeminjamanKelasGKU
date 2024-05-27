@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "dart:developer" as dev;
 import "/widgets/ddm.dart";
-import "/widgets/build_list_builder.dart";
+import "/widgets/list_builder.dart";
 
 import "/services/fetch_user_pinjam.dart";
 
@@ -72,7 +72,7 @@ class _RiwayatPinjamState extends State<RiwayatPinjam> {
                 );
               }
 
-              return BuildListBuilder(bookings: previousBooking,isDelete: false,uid: uid);
+              return ListBuilder(bookings: previousBooking,isDelete: false,uid: uid);
             },
           ),
         ),

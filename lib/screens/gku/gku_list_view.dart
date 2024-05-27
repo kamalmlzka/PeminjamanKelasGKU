@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
-import 'package:peminjaman_kelas_gku/services/get_image.dart';
+import '/services/get_image.dart';
 import '/screens/detail_ruangan.dart';
 import 'gku_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '/model/gku_list_data.dart';
+import '/models/gku_list_data.dart';
 
 class GkuListView extends StatelessWidget {
   const GkuListView(

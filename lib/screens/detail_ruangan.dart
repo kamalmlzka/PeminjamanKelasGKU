@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:peminjaman_kelas_gku/services/get_image.dart';
+import '/services/get_image.dart';
 
-import '../model/gku_list_data.dart';
-import '../widgets/ddm.dart';
+import '/models/gku_list_data.dart';
+import '/widgets/ddm.dart';
 import 'pinjam/pinjam_ruangan.dart';
 import 'gku/gku_app_theme.dart';
 

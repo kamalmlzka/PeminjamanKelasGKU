@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:peminjaman_kelas_gku/services/get_image.dart';
+import '/services/get_image.dart';
 import '/widgets/ddm.dart';
 
 String? _extractUsername() {

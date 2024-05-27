@@ -4,15 +4,15 @@ import "dart:developer" as dev;
 import 'package:google_fonts/google_fonts.dart';
 import '/widgets/ui/frosted_glass.dart';
 
-import '../services/delete_user_booking.dart';
-import '../services/update_time_slots.dart';
+import '/services/delete_user_booking.dart';
+import '/services/update_time_slots.dart';
 
-class BuildListBuilder extends StatelessWidget {
+class ListBuilder extends StatelessWidget {
   final List<DocumentSnapshot> bookings;
   final bool isDelete;
   final String uid;
 
-  const BuildListBuilder(
+  const ListBuilder(
       {required this.bookings,
       required this.isDelete,
       required this.uid,

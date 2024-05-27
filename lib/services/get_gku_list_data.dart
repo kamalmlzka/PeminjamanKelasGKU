@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../model/gku_list_data.dart';
+import '/models/gku_list_data.dart';
 
 class GetGKUListData {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

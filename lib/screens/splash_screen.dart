@@ -2,7 +2,7 @@ import "dart:async";
 
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "/widgets/background_shapes.dart";
+import "/widgets/ui/background_shapes.dart";
 
 import "/services/auth.dart";
 

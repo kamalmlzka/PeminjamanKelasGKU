@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:peminjaman_kelas_gku/firebase_options.dart';
-import 'package:peminjaman_kelas_gku/screens/splash_screen.dart';
-import 'package:peminjaman_kelas_gku/services/notification_api.dart';
+import '/firebase_options.dart';
+import '/screens/splash_screen.dart';
+import '/services/notification_api.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
