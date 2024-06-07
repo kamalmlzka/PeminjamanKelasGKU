@@ -12,8 +12,8 @@ class FetchSlots {
         int slot = documentSnapshot.data()?['slots'] ?? 0;
         return slot;
       } else {
-        await _firestore.collection("slots").doc(uid).set({'slots': 4});
-        return 4;
+        await _firestore.collection("slots").doc(uid).set({'slots': 10});
+        return 10;
       }
     } catch (error) {
       dev.log(error.toString(), name: "Error");

@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:developer' as dev;
+import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import '/services/get_image.dart';
 import '/widgets/ddm.dart';
 
 String? _extractUsername() {
@@ -23,6 +27,47 @@ class MapScreenState extends State<ProfileScreen>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
+  PlatformFile? pickedFile;
+  UploadTask? uploadTask;
+  String? pfpPath;
+
+  Future<void> _pickImageFromCamera() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        this.pickedFile = PlatformFile(
+          name: pickedFile.name,
+          path: pickedFile.path,
+          size: 140,
+        );
+        _uploadFile();
+      });
+    }
+  }
+
+  Future<void> _uploadFile() async {
+    if (pickedFile != null) {
+      final path = 'pfp/${pickedFile!.name}';
+      final file = File(pickedFile!.path!);
+
+      final ref = FirebaseStorage.instance.ref().child(path);
+
+      setState(() {
+        uploadTask = ref.putFile(file);
+      });
+
+      final snapshot = await uploadTask!.whenComplete(() {});
+      final urlDownload = await snapshot.ref.getDownloadURL();
+      dev.log(urlDownload);
+
+      setState(() {
+        pfpPath = urlDownload;
+        uploadTask = null;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -72,33 +117,54 @@ class MapScreenState extends State<ProfileScreen>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Container(
-                                  width: 140.0,
-                                  height: 140.0,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
+                                // ignore: unnecessary_null_comparison
+                                if (pfpPath != null)
+                                  Container(
+                                    width: 140.0,
+                                    height: 140.0,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(70.0),
+                                      child: Image.network(pfpPath!,
+                                          fit: BoxFit.cover),
+                                    ),
+                                  )
+                                else
+                                  Container(
+                                    width: 140.0,
+                                    height: 140.0,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey, // Placeholder color
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    child: Icon(
+                                      Icons.person, // Placeholder icon
+                                      size: 70.0,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(70.0),
-                                    child: const GetImage('profile.png'),
-                                  ),
-                                ),
                               ],
                             ),
-                            const Padding(
-                                padding:
-                                    EdgeInsets.only(top: 90.0, right: 100.0),
+                            Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 90.0, right: 100.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    CircleAvatar(
-                                      backgroundColor: Colors.red,
-                                      radius: 25.0,
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.white,
+                                    GestureDetector(
+                                      onTap: _pickImageFromCamera,
+                                      child: const CircleAvatar(
+                                        backgroundColor: Colors.red,
+                                        radius: 25.0,
+                                        child: Icon(
+                                          Icons.camera_alt,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 )),
                           ]),
