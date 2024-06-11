@@ -1,7 +1,9 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import "package:flutter_local_notifications/flutter_local_notifications.dart";
 import "package:intl/intl.dart";
+import "/main.dart";
 import "/models/gku_list_data.dart";
 import "verify_screen.dart";
 import "/services/fetch_slots.dart";
@@ -43,6 +45,7 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
   TextEditingController date = TextEditingController();
   List<String> selectedSlots = [];
   final _formKey = GlobalKey<FormState>();
+  bool _isSubmitting = false;
 
   String get ruang => kodeRuang;
 
@@ -130,7 +133,33 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
     }
   }
 
-  void performSubmission() {
+  Future<void> _showNotification() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'pinjamId',
+      'pinjamName',
+      channelDescription: 'pinjamDescription',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false,
+    );
+
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Peminjaman Berhasil',
+      'Peminjaman anda telah berhasil!',
+      platformChannelSpecifics,
+    );
+  }
+
+  void performSubmission() async {
+    setState(() {
+      _isSubmitting = true;
+    });
+
     showDialog(
         context: context,
         builder: (context) {
@@ -171,6 +200,12 @@ class _PinjamRuanganState extends State<PinjamRuangan> {
         return VerifyScreen(modelPinjam: modelPinjam);
       },
     ), (route) => false);
+
+    await _showNotification();
+
+    setState(() {
+      _isSubmitting = false;
+    });
   }
 
   Future<void> fetchTimeSlots(String date, String ruang) async {
